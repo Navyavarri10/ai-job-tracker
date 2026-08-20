@@ -1,36 +1,199 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 JobTrack AI — AI-Powered Job Application Tracker
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-16.3.1-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?style=for-the-badge&logo=tailwindcss)
+![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?style=for-the-badge&logo=prisma)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-blue?style=for-the-badge&logo=postgresql)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini%20AI-4285F4?style=for-the-badge&logo=google)
 
-First, run the development server:
+---
+
+## 📌 Project Overview
+
+**JobTrack AI** is a full-stack, AI-powered job application tracking platform built with **Next.js 16**, **React 19**, and **Google Gemini AI**. It helps job seekers manage their entire application pipeline — from tracking application statuses to leveraging AI for job description analysis, resume matching, and cover letter generation.
+
+---
+
+## ✨ Features
+
+### 📋 Application Management
+- Add, edit, and delete job applications
+- Track company, role, location, salary, job URL, and application date
+- Update application status (Applied, Interview, Offer, Rejected, etc.)
+- Add personal notes per application
+
+### 🤖 AI-Powered Tools
+- **Job Description Analyzer** — Paste a JD and get key skills, requirements, and insights extracted instantly
+- **Resume Match** — AI compares your resume against a job description and gives a match score with improvement tips
+- **AI Tools Dashboard** — Centralized hub for all AI features
+
+### 📊 Analytics Dashboard
+- Visual overview of your application pipeline
+- Track success rates, active applications, and application trends
+
+### 🔐 Authentication
+- Secure login via **NextAuth v5**
+- Per-user data isolation — each user sees only their own applications
+
+### 🗄️ Database
+- **PostgreSQL** with **Prisma ORM**
+- Accelerated queries via **Prisma Accelerate**
+
+---
+
+## 🗂️ Project Structure
+
+```
+ai-job-tracker/
+│
+├── app/
+│   ├── api/
+│   │   ├── analyze-job/        # AI job description analysis endpoint
+│   │   ├── resume-match/       # AI resume matching endpoint
+│   │   └── auth/               # NextAuth authentication routes
+│   │
+│   └── dashboard/
+│       ├── applications/       # Job applications CRUD
+│       ├── jobs/               # Jobs listing
+│       ├── analytics/          # Analytics & charts
+│       ├── ai-tools/           # AI features hub
+│       ├── resume/             # Resume management
+│       └── settings/           # User settings
+│
+├── lib/                        # Utility & helper functions
+├── prisma/
+│   ├── schema.prisma           # Database schema
+│   └── migrations/             # Database migrations
+├── public/                     # Static assets
+├── auth.ts                     # NextAuth configuration
+├── next.config.ts              # Next.js configuration
+├── tailwind.config.ts          # Tailwind CSS configuration
+└── package.json
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Frontend** | Next.js 16, React 19, TypeScript, Tailwind CSS 4 |
+| **Backend** | Next.js API Routes (App Router) |
+| **Database** | PostgreSQL + Prisma ORM + Prisma Accelerate |
+| **AI** | Google Gemini AI (`@google/genai`) |
+| **Auth** | NextAuth v5 (Beta) |
+| **Linting** | ESLint 9 |
+
+---
+
+## 🗃️ Database Schema
+
+### User
+| Field | Type | Description |
+|---|---|---|
+| `id` | String (cuid) | Unique identifier |
+| `name` | String | User's name |
+| `email` | String (unique) | User's email |
+| `createdAt` | DateTime | Account creation date |
+
+### Application
+| Field | Type | Description |
+|---|---|---|
+| `id` | String (cuid) | Unique identifier |
+| `company` | String | Company name |
+| `role` | String | Job title/role |
+| `location` | String | Job location |
+| `jobUrl` | String | Link to the job posting |
+| `salary` | String | Salary range |
+| `status` | String | Application status |
+| `applicationDate` | DateTime | Date applied |
+| `notes` | String | Personal notes |
+| `userId` | String | FK → User |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database
+- Google Gemini API key
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Navyavarri10/ai-job-tracker.git
+cd ai-job-tracker
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+```
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/ai_job_tracker"
+
+# NextAuth
+NEXTAUTH_SECRET="your-nextauth-secret"
+NEXTAUTH_URL="http://localhost:3000"
+
+# Google Gemini AI
+GEMINI_API_KEY="your-gemini-api-key"
+```
+
+### Database Setup
+
+```bash
+# Run Prisma migrations
+npx prisma migrate dev
+
+# Generate Prisma client
+npx prisma generate
+```
+
+### Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Available Scripts
 
-## Learn More
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚢 Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The easiest way to deploy is via **Vercel**:
 
-## Deploy on Vercel
+1. Push your code to GitHub
+2. Import the repo on [vercel.com](https://vercel.com)
+3. Add environment variables in Vercel dashboard
+4. Deploy!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👩‍💻 Author
+
+**Navyavarri10**
+[GitHub Profile](https://github.com/Navyavarri10)

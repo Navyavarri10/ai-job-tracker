@@ -7,6 +7,12 @@
 ![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?style=for-the-badge&logo=prisma)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-blue?style=for-the-badge&logo=postgresql)
 ![Google Gemini](https://img.shields.io/badge/Google%20Gemini%20AI-4285F4?style=for-the-badge&logo=google)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20App-brightgreen?style=for-the-badge&logo=vercel)](https://ai-job-tracker-green-seven.vercel.app)
+
+---
+
+## 🌐 Live Demo
+👉 **[https://ai-job-tracker-green-seven.vercel.app](https://ai-job-tracker-green-seven.vercel.app)**
 
 ---
 
@@ -39,7 +45,7 @@
 
 ### 🗄️ Database
 - **PostgreSQL** with **Prisma ORM**
-- Accelerated queries via **Prisma Accelerate**
+- Hosted on **Neon** (serverless PostgreSQL)
 
 ---
 
@@ -69,7 +75,6 @@ ai-job-tracker/
 ├── public/                     # Static assets
 ├── auth.ts                     # NextAuth configuration
 ├── next.config.ts              # Next.js configuration
-├── tailwind.config.ts          # Tailwind CSS configuration
 └── package.json
 ```
 
@@ -81,10 +86,10 @@ ai-job-tracker/
 |---|---|
 | **Frontend** | Next.js 16, React 19, TypeScript, Tailwind CSS 4 |
 | **Backend** | Next.js API Routes (App Router) |
-| **Database** | PostgreSQL + Prisma ORM + Prisma Accelerate |
+| **Database** | PostgreSQL + Prisma ORM (hosted on Neon) |
 | **AI** | Google Gemini AI (`@google/genai`) |
 | **Auth** | NextAuth v5 (Beta) |
-| **Linting** | ESLint 9 |
+| **Deployment** | Vercel |
 
 ---
 
@@ -114,11 +119,11 @@ ai-job-tracker/
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started Locally
 
 ### Prerequisites
 - Node.js 18+
-- PostgreSQL database
+- PostgreSQL database (or Neon free tier)
 - Google Gemini API key
 
 ### Installation
@@ -130,9 +135,6 @@ cd ai-job-tracker
 
 # Install dependencies
 npm install
-
-# Set up environment variables
-cp .env.example .env
 ```
 
 ### Environment Variables
@@ -140,30 +142,19 @@ cp .env.example .env
 Create a `.env` file in the root directory:
 
 ```env
-# Database
-DATABASE_URL="postgresql://user:password@localhost:5432/ai_job_tracker"
-
-# NextAuth
+DATABASE_URL="postgresql://user:password@host/dbname?sslmode=require"
 NEXTAUTH_SECRET="your-nextauth-secret"
 NEXTAUTH_URL="http://localhost:3000"
-
-# Google Gemini AI
 GEMINI_API_KEY="your-gemini-api-key"
 ```
 
-### Database Setup
+### Database Setup & Run
 
 ```bash
-# Run Prisma migrations
-npx prisma migrate dev
+# Push schema to database
+npx prisma db push
 
-# Generate Prisma client
-npx prisma generate
-```
-
-### Run the Development Server
-
-```bash
+# Start development server
 npm run dev
 ```
 
@@ -184,12 +175,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🚢 Deployment
 
-The easiest way to deploy is via **Vercel**:
+Deployed on **Vercel** with **Neon** PostgreSQL database.
 
-1. Push your code to GitHub
-2. Import the repo on [vercel.com](https://vercel.com)
-3. Add environment variables in Vercel dashboard
-4. Deploy!
+👉 **Live:** [https://ai-job-tracker-green-seven.vercel.app](https://ai-job-tracker-green-seven.vercel.app)
 
 ---
 
